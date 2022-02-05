@@ -51,20 +51,20 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      # - name: Get semver keyword
-      #   id: semver
-      #   uses: actions/github-script@v5
-      #   with:
-      #     script: |
-      #       const msg = github.event.head_commit.message
-      #       const start = msg.indexOf("[tag:")
-      #       const end = msg.indexOf("]", start)
-      #       return msg.substring(start + 5, end)
+      - name: Get semver keyword
+        id: semver
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const msg = github.event.head_commit.message
+            const start = msg.indexOf("[tag:")
+            const end = msg.indexOf("]", start)
+            return msg.substring(start + 5, end)
 
       - name: Publish
         run: |
           npm install
-          # lerna publish ${{steps.semver.outputs.result}} --yes
+          lerna publish ${{steps.semver.outputs.result}} --yes
 
       # see https://octokit.github.io/rest.js/v18
       # - name: Create release
