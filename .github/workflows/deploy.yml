@@ -14,9 +14,8 @@ env:
 
 jobs:
   # ----------------------------------------------------
-  # Build a docker image, tag, and publish
-  #  - only runs if [tag:patch|minor|major] is found
-  #    in commit message
+  # Build npm packages, version, and publish
+  #  - runs if [tag:patch|minor|major] in commit message
   # ----------------------------------------------------
   publish:
     runs-on: ubuntu-latest
