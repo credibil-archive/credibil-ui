@@ -1,5 +1,5 @@
 {
-  "name": "@credibil-ui/core",
+  "name": "@credibil/core",
   "version": "0.0.14",
   "private": true,
   "author": "Credibil",
@@ -12,11 +12,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/credibil/credibil-ui.git",
+    "url": "https://github.com/credibil/credibil-ui",
     "directory": "packages/core"
   },
   "publishConfig": {
-    "access": "public",
     "registry": "https://npm.pkg.github.com"
   },
   "license": "MIT",

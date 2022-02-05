@@ -1,5 +1,5 @@
 {
-  "name": "@credibil-ui/auth",
+  "name": "@credibil/auth",
   "version": "0.0.14",
   "private": true,
   "author": "Credibil",
@@ -13,11 +13,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/credibil/credibil-ui.git",
+    "url": "https://github.com/credibil/credibil-ui",
     "directory": "packages/auth"
   },
   "publishConfig": {
-    "access": "public",
     "registry": "https://npm.pkg.github.com"
   },
   "license": "MIT",
@@ -35,7 +34,7 @@
     }
   },
   "dependencies": {
-    "@credibil-ui/core": "^0.0.14",
+    "@credibil/core": "^0.0.14",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.1",

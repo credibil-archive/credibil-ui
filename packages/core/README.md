@@ -1,4 +1,4 @@
-# @credibil-ui/core
+# @credibil/core
 
 This package hosts Credibil core components.
 
