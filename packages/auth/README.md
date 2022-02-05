@@ -17,4 +17,3 @@ yarn add @mui/base
 ## Documentation
 
 [The documentation](https://credibil.github.io/credibil-ui/docs).
-
