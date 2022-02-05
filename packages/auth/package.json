@@ -1,6 +1,6 @@
 {
   "name": "@credibil/auth",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "author": "Credibil",
   "description": "Authentication using verifiable credentials",
   "main": "./src/index.js",
@@ -33,7 +33,7 @@
     }
   },
   "dependencies": {
-    "@credibil/core": "^0.0.20",
+    "@credibil/core": "^0.0.21",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.1",
