@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { QRDisplayer, statuses, useRequest } from '@credibil-ui/core';
+import { QRDisplayer, statuses, useRequest } from '@credibil/core';
 import Dialog from '@mui/material/Dialog';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';

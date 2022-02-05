@@ -1,5 +1,5 @@
 {
-  "name": "@credibil-ui/core",
+  "name": "@credibil/core",
   "version": "0.0.20",
   "author": "Credibil",
   "description": "Verification using verifiable credentials",
@@ -47,5 +47,6 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "vite": "^2.7.2"
-  }
+  },
+  "gitHead": "680dc510422b43ae51dc4dce97c198d9495e5194"
 }
