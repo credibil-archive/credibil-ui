@@ -1,7 +1,6 @@
 {
   "name": "@credibil/auth",
   "version": "0.0.15",
-  "private": true,
   "author": "Credibil",
   "description": "Authentication using verifiable credentials",
   "main": "./src/index.js",
@@ -13,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/credibil/credibil-ui",
+    "url": "git://github.com/credibil/credibil-ui.git",
     "directory": "packages/auth"
   },
   "publishConfig": {
