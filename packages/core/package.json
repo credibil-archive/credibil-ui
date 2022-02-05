@@ -1,5 +1,5 @@
 {
-  "name": "@credibil/core",
+  "name": "@credibil-ui/core",
   "version": "0.0.19",
   "author": "Credibil",
   "description": "Verification using verifiable credentials",
