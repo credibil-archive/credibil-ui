@@ -40,7 +40,6 @@ export const useRequest = (endpoint) => {
             const rsp = await fetch(request);
             const json = await rsp.json();
             // check for success
-            console.log(json.code)
             switch (json.code) {
                 case 'awaiting_issuance':
                 case 'awaiting_presentation':

@@ -1,19 +1,20 @@
 {
-  "name": "@credibil-ui/core",
+  "name": "@credibil-ui/auth",
   "version": "0.0.1",
   "private": true,
   "author": "Credibil",
-  "description": "Verification using verifiable credentials",
+  "description": "Authentication using verifiable credentials",
   "main": "./src/index.js",
   "keywords": [
     "react",
     "react-component",
+    "authentication",
     "verifiable credentials"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/credibil/credibil-ui.git",
-    "directory": "packages/core"
+    "directory": "packages/auth"
   },
   "publishConfig": {
     "access": "public",
@@ -23,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/credibil/credibil-ui/issues"
   },
-  "homepage": "https://github.com/credibil/credibil-ui/tree/master/packages/core",
+  "homepage": "https://github.com/credibil/credibil-ui/tree/master/packages/auth",
   "sideEffects": false,
   "peerDependencies": {
     "@types/react": "*"
@@ -34,6 +35,7 @@
     }
   },
   "dependencies": {
+    "@credibil-ui/core": "^0.0.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.1",

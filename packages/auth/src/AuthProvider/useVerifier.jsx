@@ -1,11 +1,11 @@
 import { useCallback, useContext, useMemo } from 'react';
 
-import { VerificationContext } from '.';
+import { AuthContext } from '.';
 
 export const useVerifier = () => {
-    const context = useContext(VerificationContext);
+    const context = useContext(AuthContext);
     if (context.state === undefined) {
-        throw new Error("useVerifier should only be used within the scope of VerificationProvider")
+        throw new Error("useVerifier should only be used within the scope of AuthContext")
     }
     const { state, dispatch } = context;
 

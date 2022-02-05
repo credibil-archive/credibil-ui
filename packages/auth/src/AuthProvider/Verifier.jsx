@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 
+import { QRDisplayer, statuses, useRequest } from '@credibil-ui/core';
 import Dialog from '@mui/material/Dialog';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-
-import { QRDisplayer, statuses } from '@/components/Credential';
-import { useRequest } from '@/components/Credential';
 
 export const Verifier = (props) => {
     const { endpoint, vcType, onPayload } = props;

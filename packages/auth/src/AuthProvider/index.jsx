@@ -39,9 +39,9 @@ const initialState = {
     error: null,
 };
 
-export const VerificationContext = createContext(initialState);
+export const AuthContext = createContext(initialState);
 
-export const VerificationProvider = (props) => {
+export const AuthProvider = (props) => {
     const { verifier, vcType, children } = props;
     initialState.verifier = verifier;
     initialState.vcType = vcType;
@@ -56,12 +56,12 @@ export const VerificationProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
-        <VerificationContext.Provider value={{ state, dispatch }}>
+        <AuthContext.Provider value={{ state, dispatch }}>
             {children}
-        </VerificationContext.Provider>
+        </AuthContext.Provider>
     );
 };
-VerificationProvider.propTypes = {
+AuthProvider.propTypes = {
     verifier: PropTypes.string.isRequired,
     vcType: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
@@ -69,12 +69,11 @@ VerificationProvider.propTypes = {
 
 // check user has claims for route
 export const withCredential = (Component) => {
-
     // create psuedo component in order to use hooks
     const WithAuth = () => {
-        const context = useContext(VerificationContext);
+        const context = useContext(AuthContext);
         if (context.state === undefined) {
-            throw new Error("withCredential is not within the scope of VerificationProvider")
+            throw new Error("withCredential is not within the scope of AuthProvider")
         }
         const { state, dispatch } = context;
 
@@ -97,5 +96,5 @@ export const withCredential = (Component) => {
 //     return true;
 // }
 
-export default VerificationProvider;
+export default AuthProvider;
 export { useVerifier } from './useVerifier';
