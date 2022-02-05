@@ -1,6 +1,6 @@
 {
   "name": "@credibil-ui/auth",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "author": "Credibil",
   "description": "Authentication using verifiable credentials",
@@ -35,7 +35,7 @@
     }
   },
   "dependencies": {
-    "@credibil-ui/core": "^0.0.3",
+    "@credibil-ui/core": "^0.0.4",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.1",
