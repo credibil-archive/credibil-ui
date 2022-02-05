@@ -1,7 +1,7 @@
 # Builds npm packages and publishes to GitHub's npm repo (https://npm.pkg.github.com).
 #
 # The workflow will only run if commit message contains [tag:patch|minor|major]
-name: Deploy Update2
+name: Deploy Update
 
 on:
   push:
