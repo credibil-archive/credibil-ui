@@ -59,7 +59,7 @@ jobs:
             const msg = github.event.head_commit.message
             const start = msg.indexOf("[tag:")
             const end = msg.indexOf("]", start)
-            return msg.substring(start + 5, end))
+            return msg.substring(start + 5, end)
 
       - name: Publish
         run: |
