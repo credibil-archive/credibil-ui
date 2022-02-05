@@ -40,24 +40,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Generate version
-        id: version
-        uses: paulhatch/semantic-version@v4.0.2
-        with:
-          major_pattern: "[tag:major]"
-          minor_pattern: "[tag:minor]"
-          short_tags: false
+      # - name: Generate version
+      #   id: version
+      #   uses: paulhatch/semantic-version@v4.0.2
+      #   with:
+      #     major_pattern: "[tag:major]"
+      #     minor_pattern: "[tag:minor]"
+      #     short_tags: false
 
-      - name: Tag repo
-        uses: actions/github-script@v5
-        with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.version.outputs.version_tag }}",
-              sha: context.sha
-            })
+      # - name: Tag repo
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: |
+      #       github.rest.git.createRef({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         ref: "refs/tags/${{ steps.version.outputs.version_tag }}",
+      #         sha: context.sha
+      #       })
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -99,41 +99,41 @@ jobs:
   # ----------------------------------------------------
   # Deploy this build
   # ----------------------------------------------------
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
 
-    steps:
-      - name: Get build
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
+  #   steps:
+  #     - name: Get build
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: dist
+  #         path: dist
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #     - name: Login to Azure
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            echo "Deploying..."
-            az storage blob sync \
-              --account-name ${{ env.STORAGE_ACCOUNT }} \
-              --source ./dist \
-              --container '$web'
+  #     - name: Deploy to Azure
+  #       uses: azure/CLI@v1
+  #       with:
+  #         inlineScript: |
+  #           echo "Deploying..."
+  #           az storage blob sync \
+  #             --account-name ${{ env.STORAGE_ACCOUNT }} \
+  #             --source ./dist \
+  #             --container '$web'
 
-      - name: Purge cache
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az afd endpoint purge \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --profile-name ${{ env.AFD_PROFILE }} \
-              --endpoint-name ${{ env.AFD_ENDPOINT }} \
-              --content-paths '/*'
+  #     - name: Purge cache
+  #       uses: azure/CLI@v1
+  #       with:
+  #         inlineScript: |
+  #           az afd endpoint purge \
+  #             --resource-group ${{ env.RESOURCE_GROUP }} \
+  #             --profile-name ${{ env.AFD_PROFILE }} \
+  #             --endpoint-name ${{ env.AFD_ENDPOINT }} \
+  #             --content-paths '/*'
 
       # # see https://octokit.github.io/rest.js/v18
       # - name: Clean up
