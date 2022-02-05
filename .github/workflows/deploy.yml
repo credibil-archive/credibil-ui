@@ -1,0 +1,154 @@
+# Builds a docker image, publishes it to GitHub's docker repo (ghcr.io),
+# and subsequently deploys it as a Container App revision.
+#
+# The workflow will only run if commit message contains [tag:patch|minor|major]
+name: Deploy Update
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: 16
+  RESOURCE_GROUP: demo
+  STORAGE_ACCOUNT: stremitter
+  AFD_PROFILE: Credibil
+  AFD_ENDPOINT: remitter
+
+jobs:
+  # ----------------------------------------------------
+  # Build a docker image, tag, and publish
+  #  - only runs if [tag:patch|minor|major] is found
+  #    in commit message
+  # ----------------------------------------------------
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    # only run if commit message contains versioning setting
+    if: |
+      contains(github.event.head_commit.message, '[tag:patch]')
+      || contains(github.event.head_commit.message, '[tag:minor]')
+      || contains(github.event.head_commit.message, '[tag:major]')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Generate version
+        id: version
+        uses: paulhatch/semantic-version@v4.0.2
+        with:
+          major_pattern: "[tag:major]"
+          minor_pattern: "[tag:minor]"
+          short_tags: false
+
+      - name: Tag repo
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ steps.version.outputs.version_tag }}",
+              sha: context.sha
+            })
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Build
+        run: |
+          yarn install
+          yarn build
+
+      - name: Retain build
+        uses: actions/upload-artifact@v2
+        with:
+          retention-days: 1
+          name: dist
+          path: |
+            dist
+            !dist/**/*.md
+
+      # - name: Cache Dependencies
+      #   id: cache-deps
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: node_modules
+      #     key: deps-${{ github.repository }}
+
+      # see https://octokit.github.io/rest.js/v18
+      - name: Create release
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: "${{ steps.version.outputs.version_tag }}"
+            })
+
+  # ----------------------------------------------------
+  # Deploy this build
+  # ----------------------------------------------------
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Get build
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            echo "Deploying..."
+            az storage blob sync \
+              --account-name ${{ env.STORAGE_ACCOUNT }} \
+              --source ./dist \
+              --container '$web'
+
+      - name: Purge cache
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az afd endpoint purge \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --profile-name ${{ env.AFD_PROFILE }} \
+              --endpoint-name ${{ env.AFD_ENDPOINT }} \
+              --content-paths '/*'
+
+      # # see https://octokit.github.io/rest.js/v18
+      # - name: Clean up
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: |
+      #       const res = await github.rest.actions.listArtifactsForRepo({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo
+      #       })
+      #       const artifacts = res.data.artifacts;
+      #       for (var i = 0; i < artifacts.length; i++) {
+      #         github.rest.actions.deleteArtifact({
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #           artifact_id: artifacts[i].id
+      #         })
+      #       }
