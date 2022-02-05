@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/credibil/credibil-ui.git",
+    "url": "git://github.com/credibil/credibil-ui.git",
     "directory": "packages/auth"
   },
   "publishConfig": {
