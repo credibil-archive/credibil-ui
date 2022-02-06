@@ -65,9 +65,9 @@ jobs:
         run: |
           npm install
           lerna publish ${{steps.semver.outputs.result}} --yes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # env:
+        #   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Get version
       #   id: version
