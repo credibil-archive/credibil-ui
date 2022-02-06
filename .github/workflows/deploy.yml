@@ -35,6 +35,11 @@ jobs:
         # with:
         #   fetch-depth: 0
 
+      - name: View context attributes
+        uses: actions/github-script@v5
+        with:
+          script: console.log(context)
+
       - name: Git identity
         run: |
           git config --global user.name 'github-actions[bot]'
