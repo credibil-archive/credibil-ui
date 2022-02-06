@@ -1,6 +1,6 @@
 {
   "name": "@credibil/core",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "author": "Credibil",
   "description": "Verification using verifiable credentials",
   "main": "./src/index.js",
