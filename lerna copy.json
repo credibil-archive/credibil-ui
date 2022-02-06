@@ -1,0 +1,20 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "version": "0.0.27",
+  "command": {
+    "publish": {
+      "fromGit": true,
+      "verifyAccess": false,
+      "conventionalCommits": true,
+      "createRelease": "github"
+    }
+  }
+}
+
+{
+    "version": "lerna version --no-changelog --no-push --no-git-tag-version",
+    "build": "lerna run --parallel --scope \"@credibil/*\" build",
+    "publish": "lerna publish",
+}
