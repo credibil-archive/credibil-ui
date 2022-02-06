@@ -45,13 +45,6 @@ jobs:
           git config --global user.name "${{ github.actor}}"
           git config --global user.email "${{ github.actor}}@users.noreply.github.com"
 
-      - name: Build npm packages
-        run: |
-          echo "@credibil:registry=https://npm.pkg.github.com" >> ./packages/auth/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ./packages/auth/.npmrc
-          echo "@credibil:registry=https://npm.pkg.github.com" >> ./packages/core/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ./packages/core/.npmrc
-
       - name: Setup node
         uses: actions/setup-node@v1
         with:
@@ -71,11 +64,10 @@ jobs:
       - name: Publish packages
         run: |
           npm install
-          lerna publish ${{steps.semver.outputs.result}} --yes 
-            # --conventional-commits --create-release github --yes
+          lerna publish ${{steps.semver.outputs.result}} --yes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Get version
       #   id: version
