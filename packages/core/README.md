@@ -7,11 +7,9 @@ This package hosts Credibil core components.
 Install the package in your project directory with:
 
 ```bash
-// with npm
-npm install @mui/base
+npm install @credibil/core
 
-// with yarn
-yarn add @mui/base
+yarn add @credibil/core
 ```
 
 ## Documentation

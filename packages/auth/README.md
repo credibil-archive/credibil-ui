@@ -8,10 +8,9 @@ Install the package in your project directory with:
 
 ```bash
 // with npm
-npm install @mui/base
+npm install @credibil/auth
 
-// with yarn
-yarn add @mui/base
+yarn add @credibil/auth
 ```
 
 ## Documentation
