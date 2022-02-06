@@ -42,8 +42,8 @@ jobs:
 
       - name: Git identity
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name ${GH_USERNAME}
+          git config --global user.email "${GH_USERNAME}@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -69,7 +69,10 @@ jobs:
           npm install
           lerna publish ${{steps.semver.outputs.result}} --yes
           # npx lerna bootstrap
-
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Get version
         id: version
         uses: actions/github-script@v5
