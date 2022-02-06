@@ -16,7 +16,7 @@
     "directory": "packages/auth"
   },
   "publishConfig": {
-    "access": "public",
+    "access": "restricted",
     "registry": "https://npm.pkg.github.com"
   },
   "license": "MIT",

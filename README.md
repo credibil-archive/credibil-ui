@@ -1,6 +1,6 @@
 # credibil-ui
 
-## managing packages with Lerna
+## Managing packages with Lerna
 
 [https://lerna.js.org](https://lerna.js.org)
 
@@ -22,3 +22,8 @@ Add the reference to the app's `package.json` dependencies:
 ```
 
 lerna publish
+
+### Installing packages
+
+From the GitHub docs:
+> You need an access token to publish, install, and delete packages.
