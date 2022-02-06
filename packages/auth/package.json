@@ -10,6 +10,7 @@
     "authentication",
     "verifiable credentials"
   ],
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/credibil/credibil-ui",
