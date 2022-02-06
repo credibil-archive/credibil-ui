@@ -23,7 +23,7 @@ jobs:
       contents: write
       packages: write
 
-    # only run if commit message contains versioning setting
+    # only run if commit message contains versioning 'flag'
     if: |
       contains(github.event.head_commit.message, '[tag:patch]')
       || contains(github.event.head_commit.message, '[tag:minor]')
@@ -32,19 +32,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        # with:
-        #   fetch-depth: 0
 
       - name: View context attributes
         uses: actions/github-script@v5
         with:
           script: console.log(context)
 
+      # User name and email are required by lerna
       - name: Git identity
         run: |
           git config --global user.name "${{ github.actor}}"
           git config --global user.email "${{ github.actor}}@users.noreply.github.com"
 
+      # Set node version and (more importantly) authenticate to package registry
       - name: Setup node
         uses: actions/setup-node@v2
         with:
@@ -54,7 +54,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get semver
+      # Get semver action (patch|minor|major) from commit message
+      - name: Commit semver
         id: semver
         uses: actions/github-script@v5
         with:
@@ -65,38 +66,11 @@ jobs:
             return msg.substring(start + 5, end)
           result-encoding: string
 
+      # Publish to npm.pkg.github.com (using settings in each package's package.json)
       - name: Publish packages
         run: |
           npm install
           lerna publish ${{steps.semver.outputs.result}} --yes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Get version
-      #   id: version
-      #   uses: actions/github-script@v5
-      #   with:
-      #     script: return require("./lerna.json").version
-      #     result-encoding: string
-
-      # - name: Get latest tag
-      #   uses: actions/github-script@v5
-      #   with:
-      #     script: |
-      #       github.rest.git.getRef({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         ref: "refs/tags/${{ steps.version.outputs.version_tag }}",
-      #       })
-
-      # see https://octokit.github.io/rest.js/v18
-      # - name: Create release
-      #   uses: actions/github-script@v5
-      #   with:
-      #     script: |
-      #       github.rest.repos.createRelease({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         tag_name: "${{ steps.version.outputs.version }}"
-      #       })
 
