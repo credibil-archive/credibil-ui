@@ -14,7 +14,6 @@
     "url": "https://github.com/credibil/credibil-ui",
     "directory": "packages/core"
   },
-  "private": false,
   "publishConfig": {
     "access": "public",
     "registry": "https://npm.pkg.github.com"
