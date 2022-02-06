@@ -1,7 +1,7 @@
 # Builds npm packages and publishes to GitHub's npm repo (https://npm.pkg.github.com).
 #
 # The workflow will only run if commit message contains [tag:patch|minor|major]
-name: Deploy Update
+name: Publish Update
 
 on:
   push:
@@ -35,23 +35,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Tag repo
-      #   uses: actions/github-script@v5
-      #   with:
-      #     script: |
-      #       github.rest.git.createRef({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         ref: "refs/tags/${{ steps.version.outputs.version_tag }}",
-      #         sha: context.sha
-      #       })
-
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Get semver keyword
+      - name: Get semver
         id: semver
         uses: actions/github-script@v5
         with:
@@ -60,20 +49,39 @@ jobs:
             const start = msg.indexOf('[tag:')
             const end = msg.indexOf(']', start)
             return msg.substring(start + 5, end)
+          result-encoding: string
 
-      - name: Publish
+      - name: Publish packages
         run: |
           npm install
           lerna publish ${{steps.semver.outputs.result}} --yes
+          # npx lerna bootstrap
 
-      # see https://octokit.github.io/rest.js/v18
-      # - name: Create release
+      - name: Get version
+        id: version
+        uses: actions/github-script@v5
+        with:
+          script: return require("./lerna.json").version
+          result-encoding: string
+
+      # - name: Get latest tag
       #   uses: actions/github-script@v5
       #   with:
       #     script: |
-      #       github.rest.repos.createRelease({
+      #       github.rest.git.getRef({
       #         owner: context.repo.owner,
       #         repo: context.repo.repo,
-      #         tag_name: "${{ steps.version.outputs.version_tag }}"
+      #         ref: "refs/tags/${{ steps.version.outputs.version_tag }}",
       #       })
+
+      # see https://octokit.github.io/rest.js/v18
+      - name: Create release
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: "${{ steps.version.outputs.version }}"
+            })
 
