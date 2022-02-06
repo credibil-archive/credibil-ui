@@ -5,7 +5,10 @@
   "version": "0.0.37",
   "command": {
     "publish": {
-      "verifyAccess": false
+      "verifyAccess": false,
+      "conventionalCommits": true,
+      "createRelease": "github",
+      "fromGit": true
     }
   }
 }
