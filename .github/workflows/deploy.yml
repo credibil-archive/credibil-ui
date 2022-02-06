@@ -44,10 +44,9 @@ jobs:
         run: |
           git config --global user.name "${{ github.actor}}"
           git config --global user.email "${{ github.actor}}@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
-          # ${GH_USERNAME}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -68,18 +67,19 @@ jobs:
       - name: Publish packages
         run: |
           npm install
-          lerna publish ${{steps.semver.outputs.result}} --yes
+          lerna publish ${{steps.semver.outputs.result}} \
+            --conventional-commits --create-release github --yes
           # npx lerna bootstrap
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get version
-        id: version
-        uses: actions/github-script@v5
-        with:
-          script: return require("./lerna.json").version
-          result-encoding: string
+      # - name: Get version
+      #   id: version
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: return require("./lerna.json").version
+      #     result-encoding: string
 
       # - name: Get latest tag
       #   uses: actions/github-script@v5
@@ -92,13 +92,13 @@ jobs:
       #       })
 
       # see https://octokit.github.io/rest.js/v18
-      - name: Create release
-        uses: actions/github-script@v5
-        with:
-          script: |
-            github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: "${{ steps.version.outputs.version }}"
-            })
+      # - name: Create release
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: |
+      #       github.rest.repos.createRelease({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         tag_name: "${{ steps.version.outputs.version }}"
+      #       })
 

@@ -5,7 +5,9 @@
   "version": "0.0.22",
   "command": {
     "publish": {
-      "verifyAccess": false
+      "verifyAccess": false,
+      "conventionalCommits": true,
+      "createRelease": "github"
     }
   }
 }
