@@ -7,21 +7,26 @@ import QRDisplayer from './QRDisplayer';
 import { useRequest } from './useRequest';
 
 export const Request = (props) => {
-    const { endpoint, vcType, claims, onStatusChange } = props;
+    const { endpoint, vcType,claims, onStatusChange } = props;
+    // const [claims] = useState(props.claims);
     const [qrCode, setQRCode] = useState();
     const { getQRCode, status } = useRequest(endpoint);
+
+    console.log(claims[0]);
 
     useEffect(() => {
         if (!qrCode) {
             (async () => {
-                setQRCode(await getQRCode({ type: vcType, claims }));
+                // console.log('getQRCode');
+                setQRCode(await getQRCode({ type: vcType, claims: claims }));
             })();
         }
-    }, [qrCode, getQRCode, vcType, claims]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [qrCode, getQRCode, vcType]);
 
     useEffect(() => {
         onStatusChange && onStatusChange(status);
-        // onChange function change shouldn't trigger hook
+        // onStatusChange function change shouldn't trigger hook
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [status]);
 

@@ -10,18 +10,28 @@ lerna publish --conventional-commits --yes
 
 Use `npm link` to create a symlink to a package's directory. For example, to create a reference to the package `@credibil/core` use:
 
+#### Step 1
+
+Publish a package from this project.
+
 ```bash
 cd packages/core
 npm link
 ```
 
+#### Step 2
+
 Add the reference to the app's `package.json` dependencies:
 
 ```bash
-"@credibil/core": "^0.0.1",
+"@credibil/core": "^n.n.n",
 ```
 
-lerna publish
+Link to the published package from the client project.
+
+```bash
+npm link @credibil/core
+```
 
 ### Installing packages
 
