@@ -45,7 +45,3 @@ export default Request;
 
 export * from './useRequest';
 export * from './QRDisplayer';
-
-// export { useRequest, statuses } from './useRequest';
-// export { Request } from './Request';
-// export { QRDisplayer } from './QRDisplayer';
