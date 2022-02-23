@@ -26,7 +26,7 @@
   "homepage": "https://github.com/credibil/credibil-ui/tree/master/packages/auth",
   "sideEffects": false,
   "peerDependencies": {
-    "@credibil/core": "^0.0.46",
+    "@credibil/core": "^0.0.49",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.4.2",

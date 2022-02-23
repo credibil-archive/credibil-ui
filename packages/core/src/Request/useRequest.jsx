@@ -98,7 +98,6 @@ export const useRequest = (endpoint) => {
         }
     }, [endpoint, checkStatus]);
 
-    // get payload from server
     return useMemo(() => {
         return { getQRCode, qrCode, status, payload };
     }, [getQRCode, qrCode, status, payload]);
