@@ -26,14 +26,6 @@
   "homepage": "https://github.com/credibil/credibil-ui/tree/master/packages/auth",
   "sideEffects": false,
   "peerDependencies": {
-    "@types/react": "*"
-  },
-  "peerDependenciesMeta": {
-    "@types/react": {
-      "optional": true
-    }
-  },
-  "dependencies": {
     "@credibil/core": "^0.0.46",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -42,6 +34,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
+  "peerDependenciesMeta": {},
+  "dependencies": {},
   "devDependencies": {
     "eslint": "^8.8.0",
     "eslint-plugin-import": "^2.25.4",

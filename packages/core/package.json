@@ -25,14 +25,6 @@
   "homepage": "https://github.com/credibil/credibil-ui/tree/master/packages/core",
   "sideEffects": false,
   "peerDependencies": {
-    "@types/react": "*"
-  },
-  "peerDependenciesMeta": {
-    "@types/react": {
-      "optional": true
-    }
-  },
-  "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.4.2",
@@ -40,5 +32,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
+  "peerDependenciesMeta": {},
+  "dependencies": {},
   "gitHead": "0f61e3e2a77d13217ffe4ae884be044a829013a2"
 }
