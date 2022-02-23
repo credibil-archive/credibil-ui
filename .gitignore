@@ -1,6 +1,12 @@
+# React artefacts
 node_modules
 dist
+*.lock
+*.log
 package-lock.json
-yarn.lock
+
+# env vars
 *.local
+
+# osx specific
 .DS_Store
