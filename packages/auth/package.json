@@ -1,6 +1,6 @@
 {
   "name": "@credibil/auth",
-  "version": "0.0.50",
+  "version": "0.0.51",
   "author": "Credibil",
   "description": "Authentication using verifiable credentials",
   "main": "./src/index.js",
@@ -35,6 +35,5 @@
     "react-dom": "^17.0.2"
   },
   "peerDependenciesMeta": {},
-  "devDependencies": {},
   "gitHead": "0f61e3e2a77d13217ffe4ae884be044a829013a2"
 }
