@@ -35,12 +35,6 @@
     "react-dom": "^17.0.2"
   },
   "peerDependenciesMeta": {},
-  "devDependencies": {
-    "eslint": "^8.8.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0"
-  },
+  "devDependencies": {},
   "gitHead": "0f61e3e2a77d13217ffe4ae884be044a829013a2"
 }
