@@ -11,7 +11,7 @@ const reducer = (state, action) => {
         case 'accessToken':
             if (action.payload) {
                 state.user = { sub: '<user subject>' }; //{ sub: action.payload.subject };
-                state.accessToken = action.payload.payload;
+                state.accessToken = action.payload.accessToken;
                 localStorage.setItem('token', JSON.stringify({
                     user: state.user,
                     accessToken: state.accessToken
@@ -78,8 +78,10 @@ export const withCredential = (Component) => {
         const { state, dispatch } = context;
 
         const handlePayload = (payload) => {
-            console.log("payload", payload);
-            dispatch({ type: 'accessToken', payload: payload });
+            console.log("handlePayload", payload);
+            // const payload = { subject: "", payload: json.payload }
+            const accessToken = { subject: "user", payload: "hello" }
+            dispatch({ type: 'accessToken', payload: accessToken });
         }
 
         return (
