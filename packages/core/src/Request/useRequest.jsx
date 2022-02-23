@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useCallback, useState } from 'react';
 
 // add validator to check if undefined property is accessed
@@ -49,7 +50,7 @@ export const useRequest = (endpoint) => {
                     setStatus(statuses.retrieved);
                     break;
                 case 'issuance_successful':
-                    case 'presentation_verified':
+                case 'presentation_verified':
                     setStatus(statuses.succeeded);
                     setPayload({ subject: "", payload: json.payload });
                     return;
@@ -97,5 +98,7 @@ export const useRequest = (endpoint) => {
         }
     }, [endpoint, checkStatus]);
 
-    return { getQRCode, qrCode, status, payload };
+    return useMemo(() => {
+        return { getQRCode, qrCode, status, payload };
+    }, [getQRCode, qrCode, status, payload]);
 };
