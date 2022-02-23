@@ -40,6 +40,7 @@ export const useRequest = (endpoint) => {
         try {
             const rsp = await fetch(request);
             const json = await rsp.json();
+            
             // check for success
             switch (json.code) {
                 case 'awaiting_issuance':
@@ -98,7 +99,7 @@ export const useRequest = (endpoint) => {
         }
     }, [endpoint, checkStatus]);
 
-    
+
     return useMemo(() => {
         return { getQRCode, qrCode, status, payload };
     }, [getQRCode, qrCode, status, payload]);

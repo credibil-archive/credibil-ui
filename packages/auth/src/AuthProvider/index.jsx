@@ -78,6 +78,7 @@ export const withCredential = (Component) => {
         const { state, dispatch } = context;
 
         const handlePayload = (payload) => {
+            console.log("payload", payload);
             dispatch({ type: 'accessToken', payload: payload });
         }
 
