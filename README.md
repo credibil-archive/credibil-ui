@@ -8,22 +8,22 @@ lerna publish --conventional-commits --yes
 
 ### Testing packages using `npm link`
 
-Use `npm link` to create a symlink to a package's directory. For example, to create a reference to the package `@credibil/core` use:
+Use `npm link` to create a symlink to a package's directory. 
 
-#### Step 1
+For example, to create a reference to the package `@credibil/core`:
 
-Publish a package from this project.
+#### Step 1 - Publish the `core` package
 
 ```bash
 cd packages/core
 npm link
 ```
 
-#### Step 2
+#### Step 2 - Reference the `core` package in the client project
 
 Add the reference to the app's `package.json` dependencies:
 
-```bash
+```json
 "@credibil/core": "^n.n.n",
 ```
 
