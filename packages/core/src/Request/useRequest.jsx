@@ -30,6 +30,9 @@ export const useRequest = (endpoint) => {
 
     // check for status of issuance or presentation
     const checkStatus = useCallback(async (stateId) => {
+
+        console.log('checkStatus', stateId);
+
         const request = new Request(`${endpoint}/status/${stateId}`, {
             method: "GET",
             headers: {
@@ -40,7 +43,7 @@ export const useRequest = (endpoint) => {
         try {
             const rsp = await fetch(request);
             const json = await rsp.json();
-            
+
             // check for success
             switch (json.code) {
                 case 'awaiting_issuance':

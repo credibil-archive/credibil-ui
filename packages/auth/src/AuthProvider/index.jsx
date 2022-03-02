@@ -10,8 +10,9 @@ const reducer = (state, action) => {
             return { ...state };
         case 'accessToken':
             if (action.payload) {
-                state.user = { sub: '<user subject>' }; //{ sub: action.payload.subject };
-                state.accessToken = action.payload.accessToken;
+                state.user = { sub: '<user subject>' };
+                // state.user = { sub: action.payload.subject };
+                state.accessToken = action.payload;
                 localStorage.setItem('token', JSON.stringify({
                     user: state.user,
                     accessToken: state.accessToken
@@ -49,7 +50,7 @@ export const AuthProvider = (props) => {
     // check for cached token
     const token = JSON.parse(localStorage.getItem('token'));
     if (token) {
-        initialState.accessToken = token;
+        initialState.accessToken = token.accessToken;
         initialState.user = token.user;
     }
 
@@ -79,7 +80,6 @@ export const withCredential = (Component) => {
 
         const handlePayload = (payload) => {
             console.log("handlePayload", payload);
-            // const payload = { subject: "", payload: json.payload }
             const accessToken = { subject: "user", payload: "hello" }
             dispatch({ type: 'accessToken', payload: accessToken });
         }
