@@ -1,16 +1,19 @@
 #!/bin/bash
 
-# link @credibil/auth library source 
+# link @credibil/core library source 
 APP_DIR=$PWD
-PKG_DIR="$PWD/../../packages"
+PKG_DIR="$PWD/../../packages/core"
 
+# link @credibil/core package source
+npm link $PKG_DIR
+# link @credibil/core's version of react to this package  
+cd $PKG_DIR && npm link $APP_DIR/node_modules/react && cd $APP_DIR
+
+# Using Yarn link instead
 # cd $PKG_DIR/core && yarn link
 # cd $APP_DIR && yarn link @credibil/core
 
-npm link ../../packages/core
-npm link ../../debug/core/node_modules/react
-npm link ../../debug/core/node_modules/react-dom
-
-# ../my-package> npm link ../my-project/node_modules/react
+# cd $APP_DIR/node_modules/react && yarn link
+# cd $PKG_DIR/core && yarn link "react"
 
 # https://benjaminwfox.com/blog/tech/why-isnt-npm-link-working

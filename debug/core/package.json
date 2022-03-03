@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "env": "./yarn_link.sh",
-    "dev": "vite --open",
+    "dev": "yarn vite --force --open",
     "build": "vite build",
     "preview": "vite preview"
   },
