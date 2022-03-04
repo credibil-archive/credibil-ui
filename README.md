@@ -6,31 +6,17 @@
 
 lerna publish --conventional-commits --yes
 
-### Testing packages using `npm link`
+### Developing packages with `npm link`
 
-Use `npm link` to create a symlink to a package's directory.
+Each package has a corresponding interactive test harness located in the `/debug` directory. The test harness can be used while developing the package to confirm behaviour and debug issues without the need to package and deploy.
 
-For example, to create a reference to the package `@credibil/core`:
+To use, simply navigate to the root directory of the appropriate test harness and run `yarn dev`. The linking is performed automatically by the `yan dev` command. Once running, any changes you make to the package should be reflected in the running test harness.
 
-#### Step 1 - Publish the `core` package
-
-```bash
-cd packages/core
-npm link
-```
-
-#### Step 2 - Reference the `core` package in the client project
-
-Add the reference to the app's `package.json` dependencies:
-
-```json
-"@credibil/core": "^n.n.n",
-```
-
-Link to the published package from the client project.
+For example, when working on the package `@credibil/core`:
 
 ```bash
-npm link @credibil/core
+cd debug/core
+yarn dev
 ```
 
 ### Installing packages
