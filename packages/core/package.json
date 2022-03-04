@@ -28,10 +28,17 @@
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.4.4",
-    "@mui/material": "^5.4.4",
+    "@mui/material": "^5.4.4"
+  },
+  "peerDependencies": {
     "@types/react": "^17.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
   },
   "gitHead": "0f61e3e2a77d13217ffe4ae884be044a829013a2"
 }

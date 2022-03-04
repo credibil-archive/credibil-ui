@@ -5,7 +5,7 @@
   "author": "Propellerhead",
   "license": "MIT",
   "scripts": {
-    "link": "./yarn_link.sh",
+    "link:dev": "./yarn_link.sh",
     "dev": "yarn vite --force --open",
     "build": "vite build",
     "preview": "vite preview"
@@ -14,8 +14,6 @@
     "@credibil/auth": "^0.0.52",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.4.4",
-    "@mui/lab": "^5.0.0-alpha.71",
     "@mui/material": "^5.4.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

@@ -26,23 +26,18 @@
   "homepage": "https://github.com/credibil/credibil-ui/tree/master/packages/auth",
   "sideEffects": false,
   "dependencies": {
-    "@credibil/core": "^0.0.52"
+    "@credibil/core": "^0.0.52",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.4.4",
+    "@mui/material": "^5.4.4"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
-    "@mui/icons-material": "^5.4.2",
-    "@mui/material": "^5.4.2",
+    "@types/react": "^17.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "peerDependenciesMeta": {
-    "@emotion/react": {
-      "optional": true
-    },
-    "@emotion/styled": {
-      "optional": true
-    },
     "@types/react": {
       "optional": true
     }
