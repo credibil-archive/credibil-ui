@@ -5,11 +5,13 @@
   "author": "Propellerhead",
   "license": "MIT",
   "scripts": {
-    "link:dev": "./npm_link.sh",
     "dev": "./npm_link.sh && yarn vite --force --open",
     "build": "vite build",
     "preview": "vite preview"
   },
+  "workspaces": [
+    "../../packages/auth"
+  ],
   "dependencies": {
     "@credibil/auth": "^0.0.52",
     "@emotion/react": "^11.8.1",
