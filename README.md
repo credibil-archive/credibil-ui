@@ -8,15 +8,15 @@ lerna publish --conventional-commits --yes
 
 ### Developing packages with `npm link`
 
-Each package has a corresponding interactive test harness located in the `/debug` directory. The test harness can be used while developing the package to confirm behaviour and debug issues without the need to package and deploy.
+Each package has a corresponding interactive test harness located in the `/debug` directory. The test harness can be used while developing the package to confirm behaviour and debug issues without the need to package and redeploy.
 
-To use, simply navigate to the root directory of the appropriate test harness and run `yarn dev`. The linking is performed automatically by the `yan dev` command. Once running, any changes you make to the package should be reflected in the running test harness.
+To use, simply navigate to the root directory of the appropriate test harness and run `npm run dev`. Linking is performed automatically using npm's `worskspaces` feature (the `auth` library also uses a dynamic linking script). Once running, any changes you make to the package should be reflected in the running test harness.
 
 For example, when working on the package `@credibil/core`:
 
 ```bash
 cd debug/core
-yarn dev
+npm run dev
 ```
 
 ### Installing packages
