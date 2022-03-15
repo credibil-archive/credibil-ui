@@ -31,8 +31,6 @@ export const useRequest = (endpoint) => {
     // check for status of issuance or presentation
     const checkStatus = useCallback(async (stateId) => {
 
-        // console.log('checkStatus', stateId);
-
         const request = new Request(`${endpoint}/status/${stateId}`, {
             method: "GET",
             headers: {
@@ -56,7 +54,7 @@ export const useRequest = (endpoint) => {
                 case 'issuance_successful':
                 case 'presentation_verified':
                     setStatus(statuses.succeeded);
-                    setPayload({ subject: "", payload: json.payload });
+                    setPayload({ accessToken: json.payload });
                     return;
                 case 'issuance_failed':
                 case 'presentation_failed':

@@ -7,12 +7,10 @@ import QRDisplayer from './QRDisplayer';
 import { useRequest } from './useRequest';
 
 export const Request = (props) => {
-    const { endpoint, vcType,claims, onStatusChange } = props;
+    const { endpoint, vcType, claims, onStatusChange } = props;
     // const [claims] = useState(props.claims);
     const [qrCode, setQRCode] = useState();
     const { getQRCode, status } = useRequest(endpoint);
-
-    console.log(claims[0]);
 
     useEffect(() => {
         if (!qrCode) {

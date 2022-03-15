@@ -5,20 +5,20 @@ import { Request, statuses } from '@credibil/core';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 
-export const Issue = () => {
+export const Present = () => {
     const [status, setStatus] = useState();
 
     return (
         <Card variant='outlined' sx={{ p: 4, width: '100%' }}>
             <Typography sx={{ my: 1, textAlign: 'center' }} variant="h2">
-                Issue Credential
+                Present Credential
             </Typography>
             <Typography sx={{ textAlign: 'center', mt: 2 }} gutterBottom variant='h4'>
-                Scan to receive your credential
+                Scan to verify your credential
             </Typography>
 
             <Request
-                endpoint={`${import.meta.env.VITE_ISSUER}/issuance`}
+                endpoint={`${import.meta.env.VITE_ISSUER}/presentation`}
                 vcType={import.meta.env.VITE_VC_TYPE}
                 claims={{
                     "given_name": 'Jane',
@@ -36,4 +36,4 @@ export const Issue = () => {
         </Card >
     )
 }
-export default Issue;
+export default Present;

@@ -9,20 +9,16 @@ const reducer = (state, action) => {
         case 'init':
             return { ...state };
         case 'accessToken':
+            // console.log('accessToken', action.payload);
             if (action.payload) {
-                state.user = { sub: '<user subject>' };
-                // state.user = { sub: action.payload.subject };
                 state.accessToken = action.payload;
-                localStorage.setItem('token', JSON.stringify({
-                    user: state.user,
-                    accessToken: state.accessToken
-                }));
+                localStorage.setItem('accessToken', state.accessToken);
             }
             return { ...state };
         case 'logout':
             state.user = null;
             state.accessToken = null;
-            localStorage.removeItem('token');
+            localStorage.removeItem('accessToken');
             return { ...state };
         case 'error':
             console.error(action.payload);
@@ -35,7 +31,6 @@ const reducer = (state, action) => {
 const initialState = {
     verifier: "",
     vcType: "",
-    user: null,
     accessToken: null,
     error: null,
 };
@@ -47,12 +42,14 @@ export const AuthProvider = (props) => {
     initialState.verifier = verifier;
     initialState.vcType = vcType;
 
+    initialState.accessToken = localStorage.getItem('accessToken')
+    console.log('AuthProvider', initialState.accessToken);
+
     // check for cached token
-    const token = JSON.parse(localStorage.getItem('token'));
-    if (token) {
-        initialState.accessToken = token.accessToken;
-        initialState.user = token.user;
-    }
+    // const token = localStorage.getItem('accessToken');
+    // if (token) {
+    //     initialState.accessToken = token;
+    // }
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -79,25 +76,26 @@ export const withCredential = (Component) => {
         const { state, dispatch } = context;
 
         const handlePayload = (payload) => {
-            console.log("handlePayload", payload);
-            const accessToken = { subject: "user", payload: "hello" }
-            dispatch({ type: 'accessToken', payload: accessToken });
+            dispatch({ type: 'accessToken', payload: payload.accessToken });
         }
 
+        console.log('withCredential', state.accessToken)
+
         return (
-            state.accessToken
-                ? <Component />
-                : <Verifier endpoint={`${state.verifier}/presentation`} vcType={state.vcType} onPayload={handlePayload} />
+            <>
+                {state.accessToken && <Component />}
+                {!state.accessToken  &&
+                    <Verifier
+                        endpoint={`${state.verifier}/presentation`}
+                        vcType={state.vcType}
+                        onPayload={handlePayload} />
+                }
+            </>
         );
     }
 
     return WithAuth;
 }
-
-// const hasClaims = (claims) => {
-//     console.log("hasClaims claims", claims);
-//     return true;
-// }
 
 export default AuthProvider;
 export { useVerifier } from './useVerifier';
