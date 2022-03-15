@@ -9,7 +9,6 @@ const reducer = (state, action) => {
         case 'init':
             return { ...state };
         case 'accessToken':
-            // console.log('accessToken', action.payload);
             if (action.payload) {
                 state.accessToken = action.payload;
                 localStorage.setItem('accessToken', state.accessToken);
@@ -39,17 +38,10 @@ export const AuthContext = createContext(initialState);
 
 export const AuthProvider = (props) => {
     const { verifier, vcType, children } = props;
+
     initialState.verifier = verifier;
     initialState.vcType = vcType;
-
     initialState.accessToken = localStorage.getItem('accessToken')
-    // console.log('AuthProvider', initialState.accessToken);
-    // check for cached token
-    // const token = localStorage.getItem('accessToken');
-    // if (token) {
-    //     initialState.accessToken = token;
-    // }
-
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
@@ -79,19 +71,16 @@ export const withCredential = (Component) => {
         }
 
         return (
-            <>
-                {state.accessToken && <Component />}
-                {!state.accessToken  &&
-                    <Verifier
-                        endpoint={`${state.verifier}/presentation`}
-                        vcType={state.vcType}
-                        onPayload={handlePayload} />
-                }
-            </>
+            state.accessToken
+                ? <Component />
+                : <Verifier
+                    endpoint={`${state.verifier}/presentation`}
+                    vcType={state.vcType}
+                    onPayload={handlePayload} />
         );
     }
 
-    return WithAuth;
+return WithAuth;
 }
 
 export default AuthProvider;
