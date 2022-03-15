@@ -1,6 +1,6 @@
 {
   "name": "@credibil/auth",
-  "version": "0.0.52",
+  "version": "0.0.53",
   "author": "Credibil",
   "description": "Authentication using verifiable credentials",
   "main": "./src/index.js",
@@ -26,7 +26,7 @@
   "homepage": "https://github.com/credibil/credibil-ui/tree/master/packages/auth",
   "sideEffects": false,
   "dependencies": {
-    "@credibil/core": "^0.0.52",
+    "@credibil/core": "^0.0.53",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.4.4",
