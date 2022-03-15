@@ -25,6 +25,10 @@
   },
   "homepage": "https://github.com/credibil/credibil-ui/tree/master/packages/auth",
   "sideEffects": false,
+  "workspaces": [
+    "../core",
+    "../../debug/auth/node_modules/react"
+  ],
   "dependencies": {
     "@credibil/core": "^0.0.53",
     "@emotion/react": "^11.8.1",

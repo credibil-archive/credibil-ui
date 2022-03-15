@@ -19,5 +19,5 @@ Clone the repository:
 git clone https://github.com/credibil/remitter-web.git
 ```
 
-Run `yarn install`
-Run `yarn dev`
+Run `npm install`
+Run `npm run dev`
