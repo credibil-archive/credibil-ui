@@ -43,8 +43,7 @@ export const AuthProvider = (props) => {
     initialState.vcType = vcType;
 
     initialState.accessToken = localStorage.getItem('accessToken')
-    console.log('AuthProvider', initialState.accessToken);
-
+    // console.log('AuthProvider', initialState.accessToken);
     // check for cached token
     // const token = localStorage.getItem('accessToken');
     // if (token) {
@@ -78,8 +77,6 @@ export const withCredential = (Component) => {
         const handlePayload = (payload) => {
             dispatch({ type: 'accessToken', payload: payload.accessToken });
         }
-
-        console.log('withCredential', state.accessToken)
 
         return (
             <>
