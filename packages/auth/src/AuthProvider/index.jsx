@@ -12,7 +12,10 @@ const reducer = (state, action) => {
             if (action.payload) {
                 state.accessToken = action.payload;
                 const eightHours = 8 * (1000 * 60 * 60);
-                localStorage.setItem(JSON.stringify({ 'accessToken': state.accessToken, expiry: Date.now() + eightHours }));
+                localStorage.setItem('accessToken', JSON.stringify({
+                    'accessToken': state.accessToken,
+                    expiry: Date.now() + eightHours
+                }));
             }
             return { ...state };
         case 'logout':
@@ -44,8 +47,8 @@ export const AuthProvider = (props) => {
     initialState.vcType = vcType;
 
     const localToken = JSON.parse(localStorage.getItem('accessToken'));
-    if (localToken && localToken.expiry < Date.now()) {
-        initialState.accessToken = JSON.parse(localStorage.getItem('accessToken'));
+    if (localToken && localToken.expiry > Date.now()) {
+        initialState.accessToken = localToken.accessToken;
     }
 
     const [state, dispatch] = useReducer(reducer, initialState);

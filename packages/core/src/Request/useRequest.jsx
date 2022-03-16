@@ -30,9 +30,6 @@ export const useRequest = (endpoint) => {
 
     // check for status of issuance or presentation
     const checkStatus = useCallback(async (stateId) => {
-
-        console.log("here");
-
         const request = new Request(`${endpoint}/status/${stateId}`, {
             method: "GET",
             headers: {
