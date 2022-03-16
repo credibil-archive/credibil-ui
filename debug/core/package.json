@@ -5,7 +5,7 @@
   "author": "Propellerhead",
   "license": "MIT",
   "scripts": {
-    "dev": "yarn vite --force --open",
+    "dev": "./npm_link.sh && yarn vite --force --open",
     "build": "vite build",
     "preview": "vite preview"
   },
